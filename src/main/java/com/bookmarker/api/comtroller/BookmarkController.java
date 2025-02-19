@@ -21,7 +21,13 @@ public class BookmarkController {
 
     @GetMapping
 //    public List<Bookmark> getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page) {
-    public BookmarksDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page) {
+    public BookmarksDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page,
+                                     @RequestParam(name = "query", defaultValue = "") String query) {
+
+        //if(query == null || query.trim().isEmpty()) {
+        if(query == null || query.isBlank()) {
+            return bookmarkService.getBookmarks(page);
+        }
         return bookmarkService.getBookmarks(page);
     }
 }
